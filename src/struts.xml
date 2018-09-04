@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<include file="struts_ajax.xml"></include>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 全局结果 -->
+		<global-results>
+			<result name="exception">exception.jsp</result>
+			<result name="no_login">/page/login.jsp</result>
+		</global-results>
+		<!--初始化的方法 -->
+		<action name="*Index" class="indexAction" method="{1}">
+			<result name="init_success">/page/hotelone.jsp</result>	
+		</action>
+		<!-- 1.用户方法 -->
+		<action name="loginUser" class="userAction" method="login">
+			<result name="login_success">/page/hotelone.jsp</result>
+			<result name="login_error">/page/login.jsp</result>
+			<result name="admin_success">/page/manager.jsp</result>
+			<result name="input">/page/login.jsp</result>
+		</action>
+		<action name="addUser" class="userAction" method="add">
+			<result name="add_success">/page/login.jsp</result>
+			<result name="add_error">/page/register.jsp</result>
+			<result name="input">/page/register.jsp</result>
+		</action>
+		<action name="addAjaxUser" class="userAction" method="addAjax">
+		    <result name="register_error">/page/register.jsp</result>
+		</action>
+		<action name="updateUser" class="userAction" method="update">
+			<result name="adminupdate_success" type="redirectAction">findByPageUser.action?nowpage=1
+			</result>
+			<result name="update_success">/page/hotelnice.jsp</result>
+		</action>
+		<action name="findByPageUser" class="userAction" method="findByPage">
+			<result name="findByPage_success">/page/user.jsp</result>
+		</action>
+		<action name="findByPageAndUserUser" class="userAction" method="findByPageAndUser">
+			<result name="findByPageAndUser_success">/page/user.jsp</result>
+		</action>
+		<action name="changeUser" class="userAction" method="change">
+			<result name="changepwd_success">/page/hotelnice.jsp</result>
+			<result name="changepwd_error">/page/chang-password.jsp</result>
+		</action>
+		<!-- 2.新闻方法 -->
+		<action name="*New" class="newAction" method="{1}">
+			<result name="findhoutai_success">/page/newlist.jsp</result>
+			<result name="find_success">/page/hotelsix.jsp</result>
+			<result name="add_success" type="redirectAction">findNew.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="add_error">/page/newadd.jsp</result>
+			<result name="delete_success" type="redirectAction">findNew.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="delete_error">/page/newlist.jsp</result>
+			<result name="findone_success">/page/newmodify.jsp</result>
+			<result name="update_success" type="redirectAction">findNew.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="update_error">/page/newmodify.jsp</result>
+		</action>
+		<!-- 3.酒店的方法 -->
+		<action name="*Hotel" class="hotelAction" method="{1}">
+			<result name="add_success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">findByPageHotel.action?type=houtai&amp;nowpage=1</param>
+			</result>
+			<result name="add_error">/page/hoteladd.jsp</result>
+			<result name="findAll_success">/page/hotellist.jsp</result>
+			<result name="findByHcity_success">/page/hotelone.jsp</result>
+
+			<result name="delete_success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">findByPageHotel.action?type=houtai&amp;nowpage=1</param>
+			</result>
+			<result name="delete_error">/page/hotellist.jsp</result>
+			<result name="findone_success">/page/hotelmodify.jsp</result>
+			<result name="update_success" type="redirectAction">findByPageHotel.action?type=houtai&amp;nowpage=1</result>
+			<result name="update_error">/page/hotelmodify.jsp</result>
+			<result name="findByPage_success">/page/hotelfirst.jsp</result>
+            <result name="findByPageHoutai_success">/page/hotellist.jsp</result>
+		</action>
+		<!-- 4.配置菜系的方法 -->
+		<action name="*Menu" class="menuAction" method="{1}">
+			<result name="findAll_success">/page/hotelthird.jsp</result>
+			<result name="findAllhoutai_success">/page/menulist.jsp</result>
+			<result name="add_success" type="redirectAction">findByPageMenu.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="add_error">/page/menuadd.jsp</result>
+			<result name="delete_success" type="redirectAction">findByPageMenu.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="delete_error">/page/menulist.jsp</result>
+			<result name="update_success" type="redirectAction">findByPageMenu.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="update_error">/page/menumodify.jsp</result>
+			<result name="findone_success">/page/menumodify.jsp</result>
+			<result name="findByPage_success">/page/hotelthird.jsp</result>
+			<result name="findByPagehoutai_success">/page/menulist.jsp</result>
+		</action>
+		<!-- 5.配置客房的信息 -->
+		<action name="*Room" class="roomAction" method="{1}">
+			<result name="findAll_success">/page/hotelfive.jsp</result>
+			<result name="findAllhoutai_success">/page/room.jsp</result>
+			<result name="add_success" type="redirectAction">findByPageRoom.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="add_error">/page/roomadd.jsp</result>
+			<result name="delete_success" type="redirectAction">findByPageRoom.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="update_success" type="redirectAction">findByPageRoom.action?type=houtai&amp;nowpage=1
+			</result>
+			<result name="update_error">/page/roommodify.jsp</result>
+			<result name="findone_success">/page/roommodify.jsp</result>
+			<result name="findadd_success">/page/hotelfour.jsp</result>
+			<result name="findByPage_success">/page/hoteltwo.jsp</result>
+			<result name="findByPagehoutai_success">/page/room.jsp</result>
+			<result name="findByPageAndHotel_success">/page/hotelten.jsp</result>
+			<result name="findRoomDuo_success">/page/hotelten.jsp</result>
+			<result name="findByduo_success">/page/hotelten.jsp</result>
+		</action>
+		<!--6. 配置留言的信息 -->
+		<action name="*Message" class="messageAction" method="{1}">
+			<result name="add_success">/page/hotelone.jsp</result>
+			<result name="add_error">/page/messageadd.jsp</result>
+			<result name="delete_success" type="redirectAction">findByPageMessage.action?nowpage=1
+			</result>
+			<result name="delete_error">/page/messagelist.jsp</result>
+			<result name="update_success" type="redirectAction">findByPageMessage.action?nowpage=1
+			</result>
+			<result name="deleteadd_success">/page/message-list.jsp</result>
+			<result name="update_error">/page/messagemodify.jsp</result>
+			<result name="findone_success">/page/messagemodify.jsp</result>
+			<result name="findAll_success">/page/messagelist.jsp</result>
+			<result name="findByPage_success">/page/messagelist.jsp</result>
+			<result name="findByPageAndUser_success">/page/message-list.jsp</result>
+		</action>
+		<!--7.配置 订单的信息 -->
+		<action name="*Order" class="orderAction" method="{1}">
+			<result name="add_success" type="redirectAction">findByStatusOrder.action?ostatus=0</result>
+			<result name="add_error">/page/orderadd.jsp</result>
+			<result name="delete_success" type="redirectAction">
+			<param name="namespace">/</param>
+			 <param name="actionName">
+			findByUserAndPageOrder.action?user.UId=${loginUser.UId}&amp;nowpage=1
+			 </param>
+			</result>
+			<result name="deletehoutai_success" type="redirectAction">findOrder.action?nowpage=1
+			</result>
+			<result name="delete_error">/page/orderlist.jsp</result>
+			<result name="update_success" type="redirectAction">findOrder.action?nowpage=1
+			</result>
+			<result name="update_error">/page/ordermodify.jsp</result>
+			<result name="findone_success">/page/ordermodify.jsp</result>
+			<result name="find_success">/page/orderlist.jsp</result>
+			<result name="findByStatus_success">page/hotelseven.jsp</result>
+			<result name="findByduo_success">/page/orderlist.jsp</result>
+			<result name="findByUserAndPage_success">/page/order-list.jsp</result>
+		</action>
+		<!--8.配置 评论的信息 -->
+		<action name="*Comment" class="commentAction" method="{1}">
+			<result name="add_success" type="redirectAction">
+			 <param name="namespace">/</param>
+			 <param name="actionName">findAllComment.action</param>
+			</result>
+			<result name="add_error">/page/comment-list2.jsp</result>
+			<result name="delete_success" type="redirectAction">
+			 <param name="namespace">/</param>
+			 <param name="actionName"> findByPageAndUserComment.action?user.UId=${loginUser.UId}&amp;nowpage=1</param>
+			</result>
+			<result name="deletehoutai_success" type="redirectAction">
+			 <param name="namespace">/</param>
+			 <param name="actionName"> findComment.action?nowpage=1</param>
+			</result>
+			<result name="delete_error">/page/comment-list.jsp</result>
+			<result name="update_success" type="redirectAction">findComment?nowpage=1
+			</result>
+			<result name="update_error">/page/commentmodify.jsp</result>
+			<result name="findone_success">/page/commentmodify.jsp</result>
+			<result name="find_success">/page/commentlist.jsp</result>
+			<result name="findByPageAndHotel_success">/page/comment-list2.jsp</result>
+			<result name="findByPageAndUser_success">/page/comment-list.jsp</result>
+            <result name="findAll_success">/page/comment-list2.jsp</result>
+		</action>
+		<!--9配置客房明细的信息 -->
+		<action name="*RoomDetail" class="roomDetailAction" method="{1}">
+			<result name="add_success" type="redirectAction">findByPageRoom.action?type=houtai&amp;nowpage=1</result>
+			<result name="add_error">/page/roomdetailadd.jsp</result>
+			<result name="delete_success" type="redirectAction">findByPageRoom.action?type=houtai&amp;nowpage=1</result>
+			<result name="delete_error">/page/roomdetail.jsp</result>
+			<result name="find_success">/page/roomdetail.jsp</result>
+			<result name="findadd_success">/page/hotelseven.jsp</result>
+			<result name="finddetail_success">/page/room-detail.jsp</result>
+		</action>
+	</package>
+</struts>    

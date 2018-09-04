@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	<!-- 配置事物管理器 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置Aop的声明事物 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="pointcut"
+			expression="execution(* com.hotel.biz.impl.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+	</aop:config>
+	<!-- 1.配置User的信息 -->
+	<bean id="userDao" class="com.hotel.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userBiz" class="com.hotel.biz.impl.UserBizImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="userAction" class="com.hotel.action.UserAction" scope="prototype">
+		<property name="userBiz" ref="userBiz"></property>
+	</bean>
+	<!--2. 配置Room的信息 -->
+	<bean id="roomDao" class="com.hotel.dao.impl.RoomDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="roomBiz" class="com.hotel.biz.impl.RoomBizImpl">
+		<property name="roomDao" ref="roomDao"></property>
+	</bean>
+	<bean id="roomAction" class="com.hotel.action.RoomAction" scope="prototype">
+		<property name="roomBiz" ref="roomBiz"></property>
+	</bean>
+	<!--3. 配置News的信息 -->
+	<bean id="newDao" class="com.hotel.dao.impl.NewDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="newBiz" class="com.hotel.biz.impl.NewBizImpl">
+		<property name="newDao" ref="newDao"></property>
+	</bean>
+	<bean id="newAction" class="com.hotel.action.NewAction" scope="prototype">
+		<property name="newBiz" ref="newBiz"></property>
+	</bean>
+	<!--4. 配置Hotel的信息 -->
+	<bean id="hotelDao" class="com.hotel.dao.impl.HotelDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="hotelBiz" class="com.hotel.biz.impl.HotelBizImpl">
+		<property name="hotelDao" ref="hotelDao"></property>
+	</bean>
+	<bean id="hotelAction" class="com.hotel.action.HotelAction" scope="prototype">
+		<property name="hotelBiz" ref="hotelBiz"></property>
+	</bean>
+	<!--5. 配置 Hcity的信息 -->
+	<bean id="hcityDao" class="com.hotel.dao.impl.HcityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="hcityBiz" class="com.hotel.biz.impl.HcityBizImpl">
+		<property name="hctDao" ref="hcityDao"></property>
+	</bean>
+	<!--6. 配置 Comment的v信息 -->
+	<bean id="commentDao" class="com.hotel.dao.impl.CommentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="commentBiz" class="com.hotel.biz.impl.CommentBizImpl">
+		<property name="comDao" ref="commentDao"></property>
+	</bean>
+	<bean id="commentAction" class="com.hotel.action.CommentAction"
+		scope="prototype">
+		<property name="commentBiz" ref="commentBiz"></property>
+		<property name="userBiz" ref="userBiz"></property>
+	</bean>
+	<!--7. 配置Menu的信息 -->
+	<bean id="menuDao" class="com.hotel.dao.impl.MenuDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="menuBiz" class="com.hotel.biz.impl.MenuBizImpl">
+		<property name="menuDao" ref="menuDao"></property>
+	</bean>
+	<bean id="menuAction" class="com.hotel.action.MenuAction" scope="prototype">
+		<property name="menuBiz" ref="menuBiz"></property>
+	</bean>
+	<!--8.配置MenuType的信息 -->
+	<bean id="menuTypeDao" class="com.hotel.dao.impl.MenuTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="menuTypeBiz" class="com.hotel.biz.impl.MenuTypeBizImpl">
+		<property name="mntyDao" ref="menuTypeDao"></property>
+	</bean>
+	<!--9. 配置message的信息 -->
+	<bean id="messageDao" class="com.hotel.dao.impl.MessageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="messageBiz" class="com.hotel.biz.impl.MessageBizImpl">
+		<property name="mesgDao" ref="messageDao"></property>
+	</bean>
+	<bean id="messageAction" class="com.hotel.action.MessageAction"
+		scope="prototype">
+		<property name="messageBiz" ref="messageBiz"></property>
+	</bean>
+	<!--10. 配置RoomDeatil的信息 -->
+	<bean id="roomDetailDao" class="com.hotel.dao.impl.RoomDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="roomDetailBiz" class="com.hotel.biz.impl.RoomDetailBizImpl">
+		<property name="rmdDao" ref="roomDetailDao"></property>
+	</bean>
+	<bean id="roomDetailAction" class="com.hotel.action.RoomDetailAction"
+		scope="prototype">
+		<property name="roomdetailBiz" ref="roomDetailBiz"></property>
+	</bean>
+	<!--11. 配置客房类型Rtype的信息 -->
+	<bean id="rtypeDao" class="com.hotel.dao.impl.RtypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="rtypeBiz" class="com.hotel.biz.impl.RtypeBizImpl">
+		<property name="rtyDao" ref="rtypeDao"></property>
+	</bean>
+	<!--12. 配置订单 -->
+	<bean id="orderDao" class="com.hotel.dao.impl.OrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="orderBiz" class="com.hotel.biz.impl.OrderBizImpl">
+		<property name="orderDao" ref="orderDao"></property>
+	</bean>
+	<bean id="orderAction" class="com.hotel.action.OrderAction" scope="prototype">
+		<property name="orderBiz" ref="orderBiz"></property>
+		<property name="roomBiz" ref="roomBiz"></property>
+		<property name="userBiz" ref="userBiz"></property>
+	</bean>
+	<!--13.配置初始化IndexAction的信息 -->
+	<bean id="indexAction" class="com.hotel.action.IndexAction" scope="prototype">
+		<property name="userBiz" ref="userBiz"></property>
+		<property name="roomBiz" ref="roomBiz"></property>
+		<property name="newBiz" ref="newBiz"></property>
+
+		<property name="hotelBiz" ref="hotelBiz"></property>
+		<property name="menuBiz" ref="menuBiz"></property>
+		<property name="metyBiz" ref="menuTypeBiz"></property>
+		<property name="messageBiz" ref="messageBiz"></property>
+		<property name="hctBiz" ref="hcityBiz"></property>
+		<property name="commentBiz" ref="commentBiz"></property>
+		<property name="rtypeBiz" ref="rtypeBiz"></property>
+	</bean>
+	<!-- 配置AjAx的信息 -->
+	<bean id="ajaxAction" class="com.hotel.action.AjaxAction">
+		<property name="roomBiz" ref="roomBiz"></property>
+	</bean>
+</beans>

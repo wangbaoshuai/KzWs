@@ -1,0 +1,291 @@
+* {
+	margin:0;
+	padding:0;
+	font-size:12px;
+	font-style:normal;
+	font-weight:normal;
+}
+h6 {
+	font-size:110%;
+}
+h5 {
+	font-size:120%;
+}
+h4 {
+	font-size:130%;
+}
+h3 {
+	font-size:140%;
+}
+h2 {
+	font-size:150%;
+}
+h1 {
+	font-size:160%;
+}
+a {
+	color:#666;
+	text-decoration:none;
+}
+a:hover {
+	color:#f30;
+	text-decoration:underline;
+}
+ul,ol {
+	list-style-type:none;
+}
+body {
+	background:white;
+	margin:0 auto;
+	padding:4px;
+}
+input.button {
+	font-size:12px;
+	padding:2px 4px;
+	color:white;
+	border:1px solid #ccc;
+	border-bottom-color:#444;
+	border-right-color:#999;
+	background:#06f;
+	cursor:pointer;
+}
+h1#header {
+	width:100%;
+	height:140px;
+	overflow:hidden;
+	background:url("../images/beta.jpg") no-repeat 25px 30px;
+	border-bottom:2px solid #B0C8E0;
+}
+h1#header * {
+	color:#06f;
+	font-weight:bold;
+	font-family:"Elephant";
+}
+h1#header a {
+	display:block;
+	width:100%;
+	height:140px;
+	line-height:230px;
+	text-align:right;
+	font-size:50px;
+	background:url("../images/logo.gif") no-repeat 140px 10px;
+}
+h1#header a:hover {
+	background-position:150px 14px;
+	text-decoration:none;
+	color:lime;
+	line-height:200px;
+}
+h1#header a em {
+	font-size:14px;
+	padding-right:100px;
+}
+h1#header a:hover em {
+	padding-right:140px;
+	color:lime;
+}
+p#sideBar {
+	border:1px solid #B0C8E0;
+	height:24px;
+	padding:4px;
+	margin:4px auto;
+}
+p#sideBar a {
+	display:block;
+	padding:0 6px;
+	height:20px;
+	line-height:20px;
+	color:black;
+	margin:2px auto;
+	float:right;
+}
+p#sideBar a:hover {
+	color:#f30;
+}
+ul#contentList {
+	width:100%;
+	height:auto;
+	margin:10px auto;
+}
+ul#contentList>li {
+	margin:10px auto;
+}
+ul#contentList>li>h3 {
+	border:1px solid #B0C8E0;
+	background:url(../images/repeat_x_bg.png) repeat-x left top;
+	height:29px;
+	line-height:29px;
+	text-indent:6px;
+	font-size:12px;
+}
+ul#contentList>li>h3 span {
+	padding-right:10px;
+}
+ul#contentList>li>div {
+	border:1px solid #DBE4E9;
+	border-top:none;
+	height:auto;
+	padding:10px;
+}
+form#fm1 {
+	display:block;
+	width:auto;
+	height:auto;
+	border:1px solid #B0C8E0;
+}
+form#fm1 h3 {
+	height:29px;
+	background:url(../images/repeat_x_bg.png) repeat-x left top;
+	line-height:29px;
+	font-size:12px;
+	padding-left:6px;
+	border-bottom:1px solid #B0C8E0;
+}
+form#fm1 h3 a {
+	float:right;
+	padding-right:10px;
+}
+form#fm1 label {
+	display:block;
+	padding:6px;
+}
+form#fm1 label input,form#fm1 label textarea {
+	border:1px solid #B0C8E0;
+	vertical-align:middle;
+	height:20px;
+	width:200px;
+}
+form#fm1 label textarea {
+	vertical-align:top;
+	width:60%;
+	height:200px;
+}
+form#fm1 input#submitButton {
+	width:81px;
+	height:28px;
+	display:block;
+	background:url(../images/no_repeat_bg.png) no-repeat left top;
+	border:1px solid #999;
+	margin:4px auto 4px 65px;
+	cursor:pointer;
+}
+/*CSS for reg.htm*/
+form#regForm {
+	padding:4px 0;
+}
+form#regForm h3,dl#clause dt {
+	border:1px solid #B0C8E0;
+	background:url(../images/repeat_x_bg.png) repeat-x left top;
+	height:29px;
+	line-height:29px;
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	color:#f30;
+}
+form#regForm fieldset input.invalid,form#regForm fieldset textarea.invalid {
+	border:1px solid fuchsia;
+	background:lightyellow;
+	width:130px;
+	height:16px;
+}
+dl#clause  {
+	width:400px;
+	height:260px;
+	border:4px solid #92B1CE;
+	-moz-border-radius:3px;
+	/*position:fixed;
+	left:50%;
+	top:50%;
+	margin-top:-130px;
+	margin-left:-200px;*/
+	margin:40px auto;
+}
+dl#clause dt {
+	font-weight:normal;
+	color:blue;
+}
+dl#clause dd {
+	width:100%;
+	height:228px;
+	padding-top:2px;
+	background:white;
+}
+dl#clause dd iframe {
+	width:96%;
+	height:84%;
+	display:block;
+	border:1px solid #ccc;
+	margin:0 auto;
+}
+dl#clause dd label {
+	display:block;
+	padding-left:30px;
+	padding-top:5px;
+}
+dl#clause dd label input {
+	vertical-align:top;
+}
+form#regForm fieldset {
+	border:1px solid #DBE4E9;
+	border-top:none;
+	height:auto;
+	padding:10px;
+	padding-left:30%;
+}
+form#regForm fieldset>label,form#regForm fieldset p {
+	display:block;
+	padding:4px;
+}
+form#regForm fieldset p.submit {
+	padding-left:100px;
+}
+form#regForm fieldset * em {
+	border:1px dashed #00A8FF;
+	color:#069;
+	background:#DEF;
+	padding:3px 4px;
+	margin-left:6px;
+}
+form#regForm fieldset * strong {
+	border:1px dashed #FF6600;
+	color:red;
+	font-weight:bold;
+	display:none;
+	background:#FFF2E9;
+	padding:3px 4px;
+	margin-left:6px;
+}
+form#regForm fieldset * span.correct {
+	display:inline-block;
+	width:14px;
+	height:14px;
+	background:url("../images/no_repeat_bg.png") no-repeat -81px 4px;
+	text-indent:-4000px;
+	padding-top:4px;
+	margin-right:2px;
+	margin-left:10px;
+}
+form#regForm fieldset * *.notice span {
+	display:inline-block;
+	width:14px;
+	height:14px;
+	padding:0;
+	background:url("../images/no_repeat_bg.png") no-repeat -81px -28px;
+	text-indent:-999px;
+	margin:0 3px;
+	margin-left:0;
+}
+form#regForm fieldset * strong.wrong span {
+	background-position:-81px -14px;
+}
+form#regForm fieldset span.curLen, form#regForm fieldset span.leftLen {
+	color:red;
+}
+form#regForm fieldset textarea,form#regForm fieldset input[type=radio] {
+	vertical-align:top;
+}
+form#regForm fieldset textarea {
+	width:300px;
+	height:80px;
+}
